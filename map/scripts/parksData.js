@@ -1,5 +1,8 @@
 "use strict";
 
+let latsList = [];
+let lngsList = [];
+
 let parksData = {
   "parks": [
     {
@@ -22,3 +25,39 @@ let parksData = {
     }
   ]
 };
+
+window.addEventListener("DOMContentLoaded", function () {
+  let popupTemplate = document.querySelector("#template-infowindow").innerHTML;
+  let compiledPopUpTemplate = Handlebars.compile(popupTemplate);
+  let map = L.map("map_container");
+  map.setView([0, 0], 2);
+
+  var attributionHtml =
+    '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
+
+  let tileLayer = L.tileLayer(
+    "https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png",
+    {
+    attribution: attributionHtml,
+  });
+
+  tileLayer.addTo(map);
+  let markersLayer = new L.LayerGroup();
+
+  for (let place of parksData.parks) {
+    console.log(place);
+    latsList.push(place.latitude);
+    lngsList.push(place.longitude);
+    let latlng = [place.latitude, place.longitude];
+    let popupHTML = compiledPopUpTemplate(place);
+    let marker = L.marker(latlng);
+    marker.bindPopup(popupHTML);
+    markersLayer.addLayer(marker);
+  }
+  markersLayer.addTo(map);
+  let padding = 0.5;
+  map.fitBounds([
+    [Math.min(...latsList) - padding, Math.min(...lngsList) - padding],
+    [Math.max(...latsList) + padding, Math.max(...lngsList) + padding],
+  ]);
+});

@@ -5,7 +5,18 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NPS Map</title>
+    <link rel="stylesheet" href="styles/site.css">
     <script src="scripts/parksData.js" ></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+    crossorigin="">
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" 
+    integrity="sha256-20n0CchB9co@qIjJZRGuk2/Z9VM+kNiyxNV11vTIZBo="
+    crossorigin=""></script>
+    
+    <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+    
     <!-- the parksData.js script contains the Parks data
          and is available as a global variable 'parksData'
         -->
@@ -17,6 +28,13 @@
     </script>
 </head>
 <body>
-    
+    <header><h1>Selected Historical Parks of New England</h1></header>
+    <main>
+        <div id="map_container"></div>
+    </main>
+    <template id="template-infowindow">
+        <h2>{{fullName}}</h2>
+        <p>{{description}}</p>
+    </template>
 </body>
 </html>

@@ -1,0 +1,19 @@
+:root {
+    --ink: rgb(130, 130, 130);
+    --footer-bg-color: rgb(245, 245, 245);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    margin: 1rem 2rem;
+}
+
+#map_container {
+    width: 100%;
+    height: 80vh;
+    border: thin solid var(--ink); 
+}
